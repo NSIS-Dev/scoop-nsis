@@ -1,0 +1,40 @@
+{
+    "homepage": "http://nsis.sourceforge.net/",
+    "license": "Zlib",
+    "version": "3.0rc2",
+    "url": "https://downloads.sourceforge.net/project/nsis/NSIS%203%20Pre-release/3.0/nsis-3.0rc2.zip",
+    "bin": [
+        "makensis.exe",
+        "nsis.exe"
+    ],
+    "hash": "sha2:0aeb4e101ce9d852de1fe4272ce53367e637bd24",
+    "extract_dir": "nsis-3.0rc2",
+    "env_set": {
+        "NSISDIR": "$dir"
+    },
+    "checkver": {
+        "url": "http://nsis.sourceforge.net/Download",
+        "re": "\\/rn\\/v([\\d.]+)\""
+    },
+    "autoupdate": {
+        "url": "https://downloads.sourceforge.net/project/nsis/NSIS%203/$version/nsis-$version.zip",
+        "extract_dir": "nsis-$version"
+    },
+    "persist": [
+        "nsisconf.nsh"
+    ],
+    "shortcuts": [
+        [
+            "NSIS.exe",
+            "NSIS"
+        ],
+        [
+            "makensisw.exe",
+            "NSIS Compiler Interface"
+        ],
+        [
+            "bin\\zip2exe.exe",
+            "NSIS Zip2Exe"
+        ]
+    ]
+}
