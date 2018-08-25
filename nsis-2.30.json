@@ -9,8 +9,8 @@
     ],
     "hash": [
         "md5:7cc74ba5992db8f6418fa49dd7c06a39",
-        "sha256:d4b6692651b916e8c4238a88e46b6530efff9ab65dc0693b34c59dce401e2b3a",
         "sha1:ae87ff543ebc38a4aea8691104c54a74804213ca",
+        "sha256:d4b6692651b916e8c4238a88e46b6530efff9ab65dc0693b34c59dce401e2b3a",
         "sha512:b28f1c697f8149b6ac58e7e0bb1ca285cc1aaf391f7ef5ab8d48be44beb3f51775a223b7a05fe1e7bfb01a37964c34c9eeeb4aacaf15007c83287680eafe9fb4"
     ],
     "extract_dir": "nsis-2.30",
