@@ -1,19 +1,19 @@
 {
     "homepage": "http://nsis.sourceforge.net/",
     "license": "Zlib",
-    "version": "2.26",
-    "url": "https://downloads.sourceforge.net/project/nsis/NSIS%202/2.26/nsis-2.26.zip",
+    "version": "2.28",
+    "url": "https://downloads.sourceforge.net/project/nsis/NSIS%202/2.28/nsis-2.28.zip",
     "bin": [
         "makensis.exe",
         "nsis.exe"
     ],
     "hash": [
-        "md5:873c2e1244f2fe4c140fe5ac9f9800a5",
-        "sha1:9d028eda4821817b51b8af5fd2926fcc61a488ed",
-        "sha256:358527c9e4201c47473b8adb964d8b8331e7aa387f94c759e662d92487f13b51",
-        "sha512:71ad9e7f0dcf53ed76002dffea5b460863136b4aafd6a0131f84a578480744ad758f14fa94b244caf026f3affe77610dcdd5afee7ad83993924d7230bbf91c64"
+        "md5:a3fefdd378a71800ad4d45c866fcbfbe",
+        "sha1:37634c56d08137acf76a8c938b40135d666b476c",
+        "sha256:9a05aec83515f511f808a540153c5358e71385ac3f5e688267929050daebd456",
+        "sha512:f7c29a41b7deb7b2001986db4e765e4036b96fc65d22825a524d2685d87c274e109f542f6ed2e59e1011c60b23a8d92360289902f73f233b30bbc14c92a52529"
     ],
-    "extract_dir": "nsis-2.26",
+    "extract_dir": "nsis-2.28",
     "env_set": {
         "NSIS_HOME": "$dir",
         "NSISDIR": "$dir"
