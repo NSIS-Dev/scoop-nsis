@@ -29,10 +29,10 @@ versions.forEach( version => {
       })
       .catch( error => {
           if (error.statusMessage) {
-            t.log(`${error.statusMessage}: nsis-${version}.zip`);
+            t.log(`Skipping test: ${error.statusMessage}`);
             t.pass();
           } else if (error.code === 'ENOENT') {
-            t.log(`Manifest not found: nsis-${version}.json`);
+            t.log(`Skipping test: Manifest not found`);
             t.pass();
           } else {
             t.fail();
