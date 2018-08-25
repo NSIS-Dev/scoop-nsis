@@ -1,8 +1,8 @@
 {
   "name": "scoop-nsis",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "description": "NSIS bucket for `scoop`, a command-line installer for Windows.",
+  "private": true,
   "scripts": {
     "build": "node util/build.js",
     "test": "npx ava ./util/test.js --verbose"
@@ -11,8 +11,9 @@
     "type": "git",
     "url": "git+https://github.com/NSIS-Dev/scoop-nsis.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+  ],
+  "author": "Jan T. sott",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/NSIS-Dev/scoop-nsis/issues"

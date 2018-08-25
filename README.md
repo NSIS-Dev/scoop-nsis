@@ -1,6 +1,6 @@
 # scoop-nsis
 
-[![CircleCI](https://flat.badgen.net/circleci/github/NSIS-Dev/scoop-nsis)](https://circleci.com/gh/NSIS-Dev/scoop-nsis)
+[![Travis CI](https://flat.badgen.net//travis/NSIS-Dev/scoop-nsis)](https://travis-ci.org/NSIS-Dev/scoop-nsis)
 [![David](https://flat.badgen.net/david/dev/NSIS-Dev/scoop-nsis)](https://david-dm.org/NSIS-Dev/scoop-nsis?type=dev)
 
 NSIS bucket for `scoop`, a command-line installer for Windows.
@@ -13,7 +13,7 @@ Make sure to have [`scoop`](https://github.com/lukesampson/scoop#installation) i
 
 Add the NSIS bucket
 
-`scoop bucket add nsis`
+`scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis`
 
 Install your preferred version of NSIS, e.g.
 
