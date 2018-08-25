@@ -10,11 +10,9 @@ let returnHash = (blob) => {
     return hasha(blob);
 };
 
-
 versions.forEach( version => {
     const major = version[0];
     const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
-
 
     test(`NSIS v${version}`, t => {
 
