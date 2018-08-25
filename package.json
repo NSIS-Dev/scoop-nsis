@@ -1,0 +1,31 @@
+{
+  "name": "scoop-nsis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node util/build.js",
+    "test": "npx ava ./test/default.js --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NSIS-Dev/scoop-nsis.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NSIS-Dev/scoop-nsis/issues"
+  },
+  "homepage": "https://github.com/NSIS-Dev/scoop-nsis#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "download": "^7.1.0",
+    "ejs": "^2.6.1",
+    "es6-promise": "^4.2.4",
+    "hasha": "^3.0.0",
+    "isomorphic-fetch": "^2.2.1",
+    "log-symbols": "^2.2.0"
+  }
+}
