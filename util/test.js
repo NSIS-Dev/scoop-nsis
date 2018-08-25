@@ -18,9 +18,11 @@ versions.forEach( version => {
     return Promise.resolve(download(url)
     .then(file => {
       const manifest = readFileSync(join(__dirname, '..', `nsis-${version}.json`), 'utf8');
+      const hashes = JSON.parse(manifest).hash;
+      const sha512 = hashes[hashes.length - 1];
 
-      const actual = hasha(file, {algorithm: 'sha256'});
-      const expected = JSON.parse(manifest).hash[0];
+      const [algorithm, expected] = sha512.split(':');
+      const actual = hasha(file, {algorithm: 'sha512'});
 
       t.is(actual, expected);
     })

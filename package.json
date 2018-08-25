@@ -5,14 +5,14 @@
   "private": true,
   "scripts": {
     "build": "node util/build.js",
+    "precommit": "npm run test",
     "test": "npx ava ./util/test.js --verbose"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/NSIS-Dev/scoop-nsis.git"
   },
-  "keywords": [
-  ],
+  "keywords": [],
   "author": "Jan T. sott",
   "license": "ISC",
   "bugs": {
@@ -26,6 +26,7 @@
     "ejs": "^2.6.1",
     "es6-promise": "^4.2.4",
     "hasha": "^3.0.0",
+    "husky": "^0.14.3",
     "isomorphic-fetch": "^2.2.1",
     "log-symbols": "^2.2.0"
   }
