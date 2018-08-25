@@ -36,7 +36,7 @@ let template = (version, hashes) => {
             return;
         }
 
-        const outFile = `${version}.json`;
+        const outFile = `nsis-${version}.json`;
         contents = JSON.stringify(JSON.parse(contents), null, 4);
 
         writeFile(outFile, contents, (err) => {
