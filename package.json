@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node util/build.js",
-    "test": "npx ava ./test/default.js --verbose"
+    "test": "npx ava ./util/test.js --verbose"
   },
   "repository": {
     "type": "git",
