@@ -36,9 +36,10 @@ let template = (version, hashes) => {
             return;
         }
 
+        const outFile = `${version}.json`;
         contents = JSON.stringify(JSON.parse(contents), null, 4);
 
-        writeFile(`nsis-${version}.json`, contents, (err) => {
+        writeFile(outFile, contents, (err) => {
           if (err) throw err;
           console.log(symbol.success, `Saved nsis-${version}.json`);
         });
@@ -64,3 +65,4 @@ versions.forEach( version => {
         console.error(symbol.error, error);
     });
 });
+
