@@ -15,6 +15,7 @@
     ],
     "extract_dir": "nsis-2.09",
     "env_set": {
+        "NSIS_HOME": "$dir",
         "NSISDIR": "$dir"
     },
     "checkver": {

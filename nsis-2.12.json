@@ -15,7 +15,6 @@
     ],
     "extract_dir": "nsis-2.12",
     "env_set": {
-        "MAKENSIS": "$dir\\makensis.exe",
         "NSIS_HOME": "$dir",
         "NSISDIR": "$dir"
     },
