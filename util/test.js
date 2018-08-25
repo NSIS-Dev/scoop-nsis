@@ -29,10 +29,10 @@ versions.forEach( version => {
       })
       .catch( error => {
           if (error.statusMessage) {
-            t.log(`Skipping test: ${error.statusMessage}`);
+            t.log(`Skipping Test: ${error.statusMessage}`);
             t.pass();
           } else if (error.code === 'ENOENT') {
-            t.log(`Skipping test: Manifest not found`);
+            t.log(`Skipping Test: Manifest Not Found`);
             t.pass();
           } else {
             t.fail();
