@@ -40,7 +40,7 @@ let template = (version, hashes) => {
 
     writeFile(outFile, contents, (err) => {
       if (err) throw err;
-      console.log(symbol.success, `Saved nsis-${version}.json`);
+      console.log(symbol.success, `Saved: nsis-${version}.json`);
     });
 })
 };
