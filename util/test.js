@@ -1,9 +1,7 @@
 // Dependencies
 const download = require('download');
 const test = require('ava');
-const fetch = require('isomorphic-fetch');
 const hasha = require('hasha');
-const symbol = require('log-symbols');
 const { join } = require('path');
 const { versions } = require('./versions.json');
 const { readFileSync } = require('fs');

@@ -1,7 +1,6 @@
 // Dependencies
 const download = require('download');
 const ejs = require('ejs');
-const fetch = require('isomorphic-fetch');
 const hasha = require('hasha');
 const symbol = require('log-symbols');
 const { join } = require('path');
