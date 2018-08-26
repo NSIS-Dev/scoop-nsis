@@ -28,11 +28,12 @@ let template = (version, hashes) => {
     version: version,
     majorVersion: version[0],
     hashes: hashes
-  }
+  };
+
   ejs.renderFile(join(__dirname, '/manifest.ejs'), data, function(err, contents) {
     if (err) {
-        console.error(symbol.error, err);
-        return;
+      console.error(symbol.error, err);
+      return;
     }
 
     const outFile = `nsis-${version}.json`;
@@ -42,7 +43,7 @@ let template = (version, hashes) => {
       if (err) throw err;
       console.log(symbol.success, `Saved: nsis-${version}.json`);
     });
-})
+  });
 };
 
 versions.forEach( version => {
@@ -51,17 +52,17 @@ versions.forEach( version => {
   const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
 
   download(url)
-  .then(getHash)
-  .then(hashes => {
-    return template(version, hashes);
-  })
-  .catch( error => {
-    if (error.statusMessage) {
-      if (error.statusMessage === 'Too Many Requests') {
-        return console.warn(symbol.warning, `${error.statusMessage}: nsis-${version}.zip`);
+    .then(getHash)
+    .then(hashes => {
+      return template(version, hashes);
+    })
+    .catch( error => {
+      if (error.statusMessage) {
+        if (error.statusMessage === 'Too Many Requests') {
+          return console.warn(symbol.warning, `${error.statusMessage}: nsis-${version}.zip`);
+        }
+        return console.error(symbol.error, `${error.statusMessage}: nsis-${version}.zip`);
       }
-      return console.error(symbol.error, `${error.statusMessage}: nsis-${version}.zip`);
-    }
-    console.error(symbol.error, error);
-  });
+      console.error(symbol.error, error);
+    });
 });
