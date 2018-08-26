@@ -21,6 +21,8 @@ Install your preferred version of NSIS
 
 ```ps
 scoop install nsis/nsis-latest
+scoop install nsis/nsis-3.03
+scoop install nsis/nsis-2.51
 ```
 
 *“That's all Folks!”*
