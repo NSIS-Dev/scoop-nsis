@@ -13,10 +13,14 @@ Make sure to have [`scoop`](https://github.com/lukesampson/scoop#installation) i
 
 Add the NSIS bucket
 
-`scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis`
+```
+scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis`
+```
 
-Install your preferred version of NSIS, e.g.
+Install your preferred version of NSIS
 
-`scoop install nsis/nsis-3.03`
+```ps
+scoop install nsis/nsis-latest
+```
 
 *“That's all Folks!”*
