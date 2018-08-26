@@ -23,7 +23,7 @@ let getHash = (blob) => {
   return hashes;
 };
 
-let template = (version, hashes) => {
+let template = (version, hashes, isLatest = false) => {
   const data = {
     version: version,
     majorVersion: version[0],
@@ -36,17 +36,17 @@ let template = (version, hashes) => {
       return;
     }
 
-    const outFile = `nsis-${version}.json`;
+    const outFile = (isLatest === true) ? 'nsis.json' : `nsis-${version}.json`;
     contents = JSON.stringify(JSON.parse(contents), null, 4);
 
     writeFile(outFile, contents, (err) => {
       if (err) throw err;
-      console.log(symbol.success, `Saved: nsis-${version}.json`);
+      console.log(symbol.success, `Saved: ${outFile}`);
     });
   });
 };
 
-versions.forEach( version => {
+const createManifest = (version, isLatest = false) => {
   const major = version[0];
   const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
   const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
@@ -54,7 +54,7 @@ versions.forEach( version => {
   download(url)
     .then(getHash)
     .then(hashes => {
-      return template(version, hashes);
+      return template(version, hashes, isLatest);
     })
     .catch( error => {
       if (error.statusMessage) {
@@ -65,4 +65,10 @@ versions.forEach( version => {
       }
       console.error(symbol.error, error);
     });
+}
+
+versions.forEach( version => {
+  createManifest(version);
 });
+
+getDownload(versions[versions.length - 1], true);
