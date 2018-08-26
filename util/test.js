@@ -29,6 +29,9 @@ versions.forEach( version => {
         } else if (error.code === 'ENOENT') {
           t.log('Skipping Test: Manifest Not Found');
           t.pass();
+        } else if (error.code === 'ENOTFOUND') {
+          t.log('Skipping Test: Can\'t Resolve Hostname');
+          t.pass();
         } else {
           t.log(error);
           t.fail();
