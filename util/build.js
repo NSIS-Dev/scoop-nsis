@@ -4,7 +4,7 @@ const ejs = require('ejs');
 const hasha = require('hasha');
 const symbol = require('log-symbols');
 const { join } = require('path');
-const { versions } = require('./versions.json');
+const versions = require('./versions.json');
 const { writeFile } = require('fs');
 
 let getHash = (blob) => {
@@ -65,10 +65,18 @@ const createManifest = (version, isLatest = false) => {
       }
       console.error(symbol.error, error);
     });
-}
+};
 
-versions.forEach( version => {
+versions.stable.v2.forEach( version => {
   createManifest(version);
 });
 
-getDownload(versions[versions.length - 1], true);
+versions.stable.v3.forEach( version => {
+  createManifest(version);
+});
+
+versions.prereleases.v3.forEach( version => {
+  createManifest(version);
+});
+
+createManifest(versions.stable.v3[versions.stable.v3.length - 1], true);

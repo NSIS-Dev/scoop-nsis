@@ -1,10 +1,11 @@
 // Dependencies
 const download = require('download');
-const test = require('ava');
 const hasha = require('hasha');
+const terminalLink = require('terminal-link');
+const test = require('ava');
 const { join } = require('path');
-const { versions } = require('./versions.json');
 const { readFileSync } = require('fs');
+const { versions } = require('./versions.json');
 
 versions.forEach( version => {
   const major = version[0];
@@ -24,12 +25,12 @@ versions.forEach( version => {
       })
       .catch( error => {
         if (error.statusMessage) {
-          t.log(`Skipping Test: ${error.statusMessage}`);
+          t.log(`Skipping Test: ${error.statusMessage} ${terminalLink('semantic version', 'https://semver.org')}`);
           t.pass();
         } else if (error.code === 'ENOENT') {
           t.log('Skipping Test: Manifest Not Found');
           t.pass();
-        } else if (error.code === 'ENOTFOUND') {
+        } else if (error.code === 'ENOTFOUND' || error.RequestError === 'ENOTFOUND') {
           t.log('Skipping Test: Can\'t Resolve Hostname');
           t.pass();
         } else {
