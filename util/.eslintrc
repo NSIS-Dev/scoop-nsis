@@ -13,6 +13,7 @@
             "error",
             "unix"
         ],
+        "no-console": 0,
         "quotes": [
             "error",
             "single"
@@ -20,7 +21,6 @@
         "semi": [
             "error",
             "always"
-        ],
-        "no-console": false
+        ]
     }
 }

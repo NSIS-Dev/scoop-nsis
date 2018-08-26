@@ -25,6 +25,7 @@
     "download": "^7.1.0",
     "ejs": "^2.6.1",
     "es6-promise": "^4.2.4",
+    "eslint": "^5.4.0",
     "hasha": "^3.0.0",
     "husky": "^0.14.3",
     "isomorphic-fetch": "^2.2.1",
