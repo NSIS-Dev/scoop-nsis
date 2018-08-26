@@ -19,7 +19,7 @@ scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis`
 
 Install your preferred version of NSIS
 
-```ps
+```ps1
 # Latest version
 scoop install nsis/nsis
 
