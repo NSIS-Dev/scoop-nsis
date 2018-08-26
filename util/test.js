@@ -30,6 +30,7 @@ versions.forEach( version => {
           t.log('Skipping Test: Manifest Not Found');
           t.pass();
         } else {
+          t.log(error);
           t.fail();
         }
       }));
