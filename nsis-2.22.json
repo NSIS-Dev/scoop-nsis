@@ -13,7 +13,7 @@
         "sha256:7caf4276340aca32198703c0efd8d6b4a72fc51fb78477a176a9d44ca7e258da",
         "sha512:d51136d06a9ab97bca1646cb233032bd82b3bdb7151f7cca517c3a33d4cce30855b914ca880db93a5fe083c279dd09e125184b617ada499ec2d2639bc1fa2755"
     ],
-    "extract_dir": "nsis",
+    "extract_dir": "nsis-2.22",
     "env_set": {
         "NSIS_HOME": "$dir",
         "NSISDIR": "$dir"
