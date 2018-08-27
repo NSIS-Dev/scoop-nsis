@@ -62,7 +62,7 @@
             "3.03"
         ]
     },
-    "prereleases": {
+    "prerelease": {
         "v3": [
             "3.0rc2",
             "3.0rc1",

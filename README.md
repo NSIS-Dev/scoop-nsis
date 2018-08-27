@@ -23,6 +23,9 @@ Install your preferred version of NSIS
 # Latest version
 scoop install nsis/nsis
 
+# Latest 2.x version
+scoop install nsis/nsis-2
+
 # Specific version
 scoop install nsis/nsis-3.03
 scoop install nsis/nsis-2.51

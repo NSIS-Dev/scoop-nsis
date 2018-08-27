@@ -1,13 +1,12 @@
 // Dependencies
 const download = require('download');
 const hasha = require('hasha');
-const terminalLink = require('terminal-link');
 const test = require('ava');
 const { join } = require('path');
 const { readFileSync } = require('fs');
-const { versions } = require('./versions.json');
+const versions = require('./versions.json');
 
-versions.forEach( version => {
+versions.stable.v3.forEach( version => {
   const major = version[0];
   const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
 

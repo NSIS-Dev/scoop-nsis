@@ -23,7 +23,7 @@ let getHash = (blob) => {
   return hashes;
 };
 
-let template = (version, hashes, isLatest = false) => {
+let template = (version, hashes, outFile = null) => {
   const data = {
     version: version,
     majorVersion: version[0],
@@ -36,7 +36,7 @@ let template = (version, hashes, isLatest = false) => {
       return;
     }
 
-    const outFile = (isLatest === true) ? 'nsis.json' : `nsis-${version}.json`;
+    outFile = (outFile !== null) ? outFile : `nsis-${version}.json`;
     contents = JSON.stringify(JSON.parse(contents), null, 4);
 
     writeFile(outFile, contents, (err) => {
@@ -46,7 +46,7 @@ let template = (version, hashes, isLatest = false) => {
   });
 };
 
-const createManifest = (version, isLatest = false) => {
+const createManifest = (version, outFile = null) => {
   const major = version[0];
   const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
   const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
@@ -54,7 +54,7 @@ const createManifest = (version, isLatest = false) => {
   download(url)
     .then(getHash)
     .then(hashes => {
-      return template(version, hashes, isLatest);
+      return template(version, hashes, outFile);
     })
     .catch( error => {
       if (error.statusMessage) {
@@ -62,6 +62,8 @@ const createManifest = (version, isLatest = false) => {
           return console.warn(symbol.warning, `${error.statusMessage}: nsis-${version}.zip`);
         }
         return console.error(symbol.error, `${error.statusMessage}: nsis-${version}.zip`);
+      } else if (error.code === 'ENOENT') {
+        return console.log('Skipping Test: Manifest Not Found');
       }
       console.error(symbol.error, error);
     });
@@ -75,8 +77,9 @@ versions.stable.v3.forEach( version => {
   createManifest(version);
 });
 
-versions.prereleases.v3.forEach( version => {
+versions.prerelease.v3.forEach( version => {
   createManifest(version);
 });
 
-createManifest(versions.stable.v3[versions.stable.v3.length - 1], true);
+createManifest(versions.stable.v2[versions.stable.v2.length - 1], 'nsis-2.json');
+createManifest(versions.stable.v3[versions.stable.v3.length - 1], 'nsis.json');
