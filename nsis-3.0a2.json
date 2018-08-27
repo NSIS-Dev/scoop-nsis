@@ -31,8 +31,7 @@
     ],
     "shortcuts": [
         [
-            "NSIS.exe",
-            "NSIS"
+            "NSIS.exe"
         ]
     ]
 }
