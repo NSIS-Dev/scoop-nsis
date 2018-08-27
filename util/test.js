@@ -6,7 +6,10 @@ const { join } = require('path');
 const { readFileSync } = require('fs');
 const versions = require('./versions.json');
 
-versions.stable.v3.forEach( version => {
+const allVersions = [...versions.stable.v2, ...versions.prerelease.v3, ...versions.stable.v3];
+
+// TODO: test all versions
+allVersions.forEach( version => {
   const major = version[0];
   const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
 
@@ -23,15 +26,17 @@ versions.stable.v3.forEach( version => {
         t.is(actual, expected);
       })
       .catch( error => {
-        if (error.statusMessage) {
-          t.log(`Skipping Test: ${error.statusMessage} ${terminalLink('semantic version', 'https://semver.org')}`);
+        error = error.toString().trim();
+
+        if (error === 'HTTPError: Response code 429 (Too Many Requests)' || error === 'HTTPError: Response code 404 (Not Found)') {
+          t.log(`Skipping Test: ${error}`);
           t.pass();
-        } else if (error.code === 'ENOENT') {
-          t.log('Skipping Test: Manifest Not Found');
+        } else if (error.startsWith('Error: ENOENT')) {
+          t.log(`Skipping Test:  ${error}`);
           t.pass();
-        } else if (error.code === 'ENOTFOUND' || error.RequestError === 'ENOTFOUND') {
-          t.log('Skipping Test: Can\'t Resolve Hostname');
-          t.pass();
+        // } else if (error.code === 'ENOTFOUND' || error.RequestError === 'ENOTFOUND') {
+        //   t.log('Skipping Test: Can\'t Resolve Hostname');
+        //   t.pass();
         } else {
           t.log(error);
           t.fail();

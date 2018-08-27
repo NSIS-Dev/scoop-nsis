@@ -69,17 +69,13 @@ const createManifest = (version, outFile = null) => {
     });
 };
 
-versions.stable.v2.forEach( version => {
+const allVersions = [...versions.stable.v2, ...versions.prerelease.v3, ...versions.stable.v3];
+
+// All versions
+allVersions.forEach( version => {
   createManifest(version);
 });
 
-versions.stable.v3.forEach( version => {
-  createManifest(version);
-});
-
-versions.prerelease.v3.forEach( version => {
-  createManifest(version);
-});
-
+// Special cases
 createManifest(versions.stable.v2[versions.stable.v2.length - 1], 'nsis-2.json');
 createManifest(versions.stable.v3[versions.stable.v3.length - 1], 'nsis.json');
