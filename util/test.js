@@ -32,7 +32,7 @@ allVersions.forEach( version => {
           t.log('Skipping Test: Too Many Requests');
           t.pass();
         } else if (error === 'HTTPError: Response code 404 (Not Found)') {
-          t.log('Skippign Test: Not Found');
+          t.log('Skipping Test: Not Found');
           t.pass();
         } else if (error.startsWith('Error: ENOENT')) {
           t.log(`Skipping Test:  ${error}`);
