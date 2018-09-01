@@ -11,10 +11,8 @@ let getHash = (blob) => {
   const sha1 = hasha(blob, {algorithm: 'sha1'});
   const sha256 = hasha(blob, {algorithm: 'sha256'});
   const sha512 = hasha(blob, {algorithm: 'sha512'});
-  const md5 = hasha(blob, {algorithm: 'md5'});
 
   const hashes = [
-    `md5:${md5}`,
     `sha1:${sha1}`,
     `sha256:${sha256}`,
     `sha512:${sha512}`
