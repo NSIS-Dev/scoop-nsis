@@ -35,6 +35,7 @@ let template = (version, hashes, outFile = null) => {
     }
 
     outFile = (outFile !== null) ? outFile : `nsis-${version}.json`;
+    outFile = join(process.cwd(), 'bucket', outFile);
     contents = JSON.stringify(JSON.parse(contents), null, 4);
 
     writeFile(outFile, contents, (err) => {
