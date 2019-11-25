@@ -6,7 +6,7 @@
   "scripts": {
     "build": "node util/build.js",
     "precommit": "npm run test",
-    "test": "npx ava ./util/test.js --verbose"
+    "test": "ava ./util/test.js --verbose"
   },
   "repository": {
     "type": "git",
