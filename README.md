@@ -14,7 +14,7 @@ Make sure to have [`scoop`](https://github.com/lukesampson/scoop#installation) i
 Add the NSIS bucket
 
 ```
-scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis`
+scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis
 ```
 
 Install your preferred version of NSIS
