@@ -5,15 +5,16 @@ const test = require('ava');
 const { join } = require('path');
 const { readFileSync } = require('fs');
 const versions = require('./versions.json');
+const { asyncForEach } = require('./shared');
 
 const allVersions = [...versions.stable.v2, ...versions.prerelease.v3, ...versions.stable.v3];
 
 // TODO: test all versions
-allVersions.forEach( version => {
+asyncForEach(allVersions, async version => {
   const major = version[0];
   const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
 
-  test(`NSIS v${version}`, t => {
+  test(`NSIS v${version}`, async t => {
     return Promise.resolve(download(url)
       .then(file => {
         const manifest = readFileSync(join(__dirname, '..', 'bucket', `nsis-${version}.json`), 'utf8');

@@ -6,6 +6,7 @@ const symbol = require('log-symbols');
 const { join } = require('path');
 const versions = require('./versions.json');
 const { writeFile } = require('fs');
+const { asyncForEach } = require('./shared');
 
 let getHash = (blob) => {
   const sha1 = hasha(blob, {algorithm: 'sha1'});
@@ -45,12 +46,12 @@ let template = (version, hashes, outFile = null) => {
   });
 };
 
-const createManifest = (version, outFile = null) => {
+const createManifest = async (version, outFile = null) => {
   const major = version[0];
   const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
   const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
 
-  download(url)
+  await download(url)
     .then(getHash)
     .then(hashes => {
       return template(version, hashes, outFile);
@@ -71,10 +72,6 @@ const createManifest = (version, outFile = null) => {
 const allVersions = [...versions.stable.v2, ...versions.prerelease.v3, ...versions.stable.v3];
 
 // All versions
-allVersions.forEach( version => {
-  createManifest(version);
+asyncForEach(allVersions, async (version) => {
+  await createManifest(version);
 });
-
-// Special cases
-createManifest(versions.stable.v2[versions.stable.v2.length - 1], 'nsis-2.json');
-createManifest(versions.stable.v3[versions.stable.v3.length - 1], 'nsis.json');
