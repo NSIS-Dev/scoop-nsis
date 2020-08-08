@@ -1,11 +1,11 @@
 // Dependencies
-const download = require('download');
-const hasha = require('hasha');
-const test = require('ava');
-const { join } = require('path');
-const { readFileSync } = require('fs');
-const versions = require('./versions.json');
-const { asyncForEach } = require('./shared');
+import { asyncForEach } from './shared';
+import { join } from 'path';
+import { readFileSync } from 'fs';
+import download from 'download';
+import hasha from 'hasha';
+import test from 'ava';
+import versions from './versions.json';
 
 const allVersions = [...versions.stable.v2, ...versions.prerelease.v3, ...versions.stable.v3];
 
@@ -14,7 +14,7 @@ asyncForEach(allVersions, async version => {
   const major = version[0];
   const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
 
-  test(`NSIS v${version}`, async t => {
+  await test(`NSIS v${version}`, async t => {
     return Promise.resolve(download(url)
       .then(file => {
         const manifest = readFileSync(join(__dirname, '..', 'bucket', `nsis-${version}.json`), 'utf8');

@@ -5,6 +5,7 @@ node_modules/
 # Error Logs
 *npm-debug.log*
 yarn-error.log
+yarn.lock
 
 # Project specific
 *.exe
