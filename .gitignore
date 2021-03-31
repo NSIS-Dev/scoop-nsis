@@ -7,6 +7,9 @@ node_modules/
 yarn-error.log
 yarn.lock
 
+# Development
+.eslintcache
+
 # Project specific
 *.exe
 *.zip
