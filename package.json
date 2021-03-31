@@ -5,8 +5,8 @@
   "private": true,
   "scripts": {
     "build": "node scripts/build.js",
-    "lint:ejs": "ejslint generators/**/*.ejs",
-    "lint:js": "eslint generators/**/*.js",
+    "lint:ejs": "ejslint scripts/**/*.ejs",
+    "lint:js": "eslint scripts/**/*.js",
     "lint": "npm-run-all --parallel lint:*",
     "precommit": "npm run test",
     "test": "ava --verbose"
