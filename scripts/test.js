@@ -21,7 +21,7 @@ asyncForEach(allVersions, async version => {
         const hashes = JSON.parse(manifest).hash;
         const sha512 = hashes[hashes.length - 1];
 
-        const [algorithm, expected] = sha512.split(':');
+        const [, expected] = sha512.split(':');
         const actual = hasha(file, {algorithm: 'sha512'});
 
         t.is(actual, expected);
