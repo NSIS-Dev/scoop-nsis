@@ -15,10 +15,10 @@ const fetch = MFH.defaults({
 const __dirname = path.resolve(path.dirname(''));
 
 async function getHash(blob) {
-  blob = new Uint32Array(blob)
-  const sha1 = await _sha1(blob);
-  const sha256 = await _sha256(blob);
-  const sha512 = await _sha512(blob);
+  const data = new Uint32Array(blob)
+  const sha1 = await _sha1(data);
+  const sha256 = await _sha256(data);
+  const sha512 = await _sha512(data);
 
   const hashes = [
     `sha1:${sha1}`,
