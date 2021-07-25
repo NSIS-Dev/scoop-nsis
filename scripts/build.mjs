@@ -67,11 +67,11 @@ const createManifest = async (version, outFile = null) => {
       if (error.statusMessage === 'Too Many Requests') {
         return console.warn(logSymbols.warning, `${error.statusMessage}: nsis-${version}.zip`);
       }
-      return console.error(_error, `${error.statusMessage}: nsis-${version}.zip`);
+      return console.error(logSymbols.error, `${error.statusMessage}: nsis-${version}.zip`);
     } else if (error.code === 'ENOENT') {
       return console.log('Skipping Test: Manifest Not Found');
     }
-    console.error(_error, error);
+    console.error(logSymbols.error, error);
   }
 
   const hashes = await getHash(await response.blob())
@@ -85,8 +85,10 @@ asyncForEach(allVersions, async (version) => {
   await createManifest(version);
 });
 
-const v2Versions = stable.v2;
-const v3Versions = stable.v3;
-
-await createManifest(v2Versions[v2Versions.length - 1], 'nsis-2.json');
-await createManifest(v3Versions[v3Versions.length - 1], 'nsis.json');
+(async () => {
+  const v2Versions = stable.v2;
+  const v3Versions = stable.v3;
+  
+  await createManifest(v2Versions[v2Versions.length - 1], 'nsis-2.json');
+  await createManifest(v3Versions[v3Versions.length - 1], 'nsis.json');
+})();
