@@ -6,10 +6,11 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "lint:ejs": "ejslint scripts/**/*.ejs",
-    "lint:js": "eslint scripts/**/*.js",
+    "lint:js": "eslint scripts/**/*.mjs",
     "lint": "npm-run-all --parallel lint:*",
     "precommit": "npm run test",
-    "test": "ava --verbose"
+    "test": "ava --verbose",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,8 @@
   },
   "homepage": "https://github.com/NSIS-Dev/scoop-nsis#readme",
   "devDependencies": {
-    "@babel/eslint-parser": "^7.13.14",
+    "@babel/core": "^7.14.8",
+    "@babel/eslint-parser": "^7.14.7",
     "@babel/preset-env": "^7.13.12",
     "ava": "^3.11.1",
     "core-js": "^3.10.0",
@@ -34,7 +36,7 @@
     "esm": "^3.2.25",
     "hash-wasm": "^4.9.0",
     "hasha": "^5.2.2",
-    "husky": ">=4.3 <5",
+    "husky": "^7.0.0",
     "jsonlint": "^1.6.3",
     "lint-staged": "^10.5.4",
     "log-symbols": "^4.1.0",
@@ -48,14 +50,9 @@
       "esm"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.ejs": "ejslint",
-    "*.js": "eslint --cache --fix",
+    "*.(js|mjs)": "eslint --cache --fix",
     "*.json": "jsonlint --quiet"
   },
   "dependencies": {
