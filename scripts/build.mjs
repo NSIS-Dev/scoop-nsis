@@ -1,9 +1,9 @@
 // Dependencies
 import { asyncForEach } from './shared.mjs';
 import { renderFile } from 'ejs';
-import { sha1 as _sha1, sha256 as _sha256, sha512 as _sha512 } from 'hash-wasm';
 import { stable, prerelease } from './versions.mjs';
 import { writeFile } from 'fs';
+import * as hash from 'hash-wasm';
 import logSymbols from 'log-symbols';
 import MFH from 'make-fetch-happen';
 import path from 'path';
@@ -16,9 +16,9 @@ const __dirname = path.resolve(path.dirname(''));
 
 async function getHash(blob) {
   const data = new Uint32Array(blob)
-  const sha1 = await _sha1(data);
-  const sha256 = await _sha256(data);
-  const sha512 = await _sha512(data);
+  const sha1 = await hash.sha1(data);
+  const sha256 = await hash.sha256(data);
+  const sha512 = await hash.sha512(data);
 
   const hashes = [
     `sha1:${sha1}`,
