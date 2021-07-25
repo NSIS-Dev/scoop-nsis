@@ -5,6 +5,6 @@ const asyncForEach = async (array, callback) => {
     }
 }
 
-module.exports = {
+export {
    asyncForEach
 };

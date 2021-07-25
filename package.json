@@ -4,7 +4,7 @@
   "description": "NSIS bucket for `scoop`, a command-line installer for Windows.",
   "private": true,
   "scripts": {
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.mjs",
     "lint:ejs": "ejslint scripts/**/*.ejs",
     "lint:js": "eslint scripts/**/*.js",
     "lint": "npm-run-all --parallel lint:*",
@@ -27,12 +27,12 @@
     "@babel/preset-env": "^7.13.12",
     "ava": "^3.11.1",
     "core-js": "^3.10.0",
-    "download": "^8.0.0",
     "ejs": "^3.1.6",
     "ejs-lint": "^1.1.0",
     "es6-promise": "^4.2.4",
     "eslint": "^7.23.0",
     "esm": "^3.2.25",
+    "hash-wasm": "^4.9.0",
     "hasha": "^5.2.2",
     "husky": ">=4.3 <5",
     "jsonlint": "^1.6.3",
@@ -42,7 +42,7 @@
   },
   "ava": {
     "files": [
-      "scripts/test.js"
+      "scripts/test.mjs"
     ],
     "require": [
       "esm"
@@ -57,5 +57,8 @@
     "*.ejs": "ejslint",
     "*.js": "eslint --cache --fix",
     "*.json": "jsonlint --quiet"
+  },
+  "dependencies": {
+    "make-fetch-happen": "^9.0.4"
   }
 }
