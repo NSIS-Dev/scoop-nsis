@@ -8,9 +8,9 @@
         "nsis.exe"
     ],
     "hash": [
-        "sha1:da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "sha512:cf83e1357eefb8bdf1542850d66d8007d620e4050b5715dc83f4a921d36ce9ce47d0d13c5d85f2b0ff8318d2877eec2f63b931bd47417a81a538327af927da3e"
+        "sha1:d46ee3d1f0e747fb219edbe57b206348933b349f",
+        "sha256:e9fdf66c7aedd3268bd3127d894be79ee41e2570509c47696bd770e666bed769",
+        "sha512:3f3f7d13b334df9d05e553ecb8aa6d8d0b0358db7fe634890b284b32bc4fcb96c41fc202145ac0cf752615b5538c90b06fa689be4708c92e17ac0c929c77fdad"
     ],
     "extract_dir": "nsis-2.34",
     "env_set": {

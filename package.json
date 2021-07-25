@@ -37,6 +37,7 @@
     "hash-wasm": "^4.9.0",
     "hasha": "^5.2.2",
     "husky": "^7.0.0",
+    "is-ci": "^2.0.0",
     "jsonlint": "^1.6.3",
     "lint-staged": "^10.5.4",
     "log-symbols": "^4.1.0",

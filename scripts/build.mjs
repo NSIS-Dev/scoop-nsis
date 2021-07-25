@@ -5,6 +5,7 @@ import { stable, prerelease } from './versions.mjs';
 import { writeFile } from 'fs';
 import * as hash from 'hash-wasm';
 import logSymbols from 'log-symbols';
+import isCI from 'is-ci';
 import MFH from 'make-fetch-happen';
 import path from 'path';
 
@@ -15,7 +16,7 @@ const fetch = MFH.defaults({
 const __dirname = path.resolve(path.dirname(''));
 
 async function getHash(blob) {
-  const data = new Uint32Array(blob)
+  const data = new Uint8Array(blob)
   const sha1 = await hash.sha1(data);
   const sha256 = await hash.sha256(data);
   const sha512 = await hash.sha512(data);
@@ -56,7 +57,9 @@ let template = (version, hashes, outFile = null) => {
 const createManifest = async (version, outFile = null) => {
   const major = version[0];
   const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
-  const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
+  const url = isCI
+    ? `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`
+    : `https://netcologne.dl.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
 
   let response;
 
@@ -74,7 +77,7 @@ const createManifest = async (version, outFile = null) => {
     console.error(logSymbols.error, error);
   }
 
-  const hashes = await getHash(await response.blob())
+  const hashes = await getHash(await response.arrayBuffer())
   template(version, hashes, outFile);
 };
 
