@@ -1,12 +1,11 @@
 // Dependencies
-import { asyncForEach } from './shared.mjs';
-import * as hashWasm from 'hash-wasm';
-import MFH from 'make-fetch-happen';
-import symbol from 'log-symbols';
-import test from 'ava';
-import fs from 'fs';
-import path from 'path';
+import { asyncForEach, getHash } from './shared.mjs';
 import { stable, prerelease } from './versions.mjs';
+import fs from 'fs/promises';
+import isCI from 'is-ci';
+import MFH from 'make-fetch-happen';
+import path from 'path';
+import test from 'ava';
 
 const fetch = MFH.defaults({
   cacheManager: '.cache'
@@ -19,33 +18,27 @@ const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3];
 // TODO: test all versions
 asyncForEach(allVersions, async version => {
   const major = version[0];
-  const url = `https://downloads.sourceforge.net/project/nsis/NSIS%20${major}/${version}/nsis-${version}.zip`;
+  const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
+  const url = isCI
+    ? `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`
+    : `https://netcologne.dl.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
 
   await test(`NSIS v${version}`, async t => {
-    let response;
-
-    try {
-      response = await fetch(url);
-    } catch (error) {
-      if (error.statusMessage) {
-        if (error.statusMessage === 'Too Many Requests') {
-          return t.log(symbol.warning, `${error.statusMessage}: nsis-${version}.zip`);
-        }
-        return t.log(symbol.error, `${error.statusMessage}: nsis-${version}.zip`);
-      } else if (error.code === 'ENOENT') {
-        return t.log('Skipping Test: Manifest Not Found');
-      }
-      t.log(symbol.error, error);
+    let response = await fetch(url);
+    
+    if (!response.ok) {
+      t.log(response.statusText);
+      t.pass('Skipping Test');
     }
-
-    const manifest = fs.readFileSync(path.join(__dirname, 'bucket', `nsis-${version}.json`), 'utf8');
+    
+    const manifest = await fs.readFile(path.join(__dirname, 'bucket', `nsis-${version}.json`), 'utf8');
     const hashes = JSON.parse(manifest).hash;
-    const sha512 = hashes[hashes.length - 1];
+    const sha512 = hashes.filter(item => item.startsWith('sha512:'))[0];
 
-    const actual = await hashWasm.sha512(new Uint32Array(await response.blob()))
+    const hash = (await getHash(await response.arrayBuffer())).filter(item => item.startsWith('sha512:'))[0];
+    const [, actual] = hash.split(':');
     const [, expected] = sha512.split(':');
 
     t.is(actual, expected);
-
   });
 });
