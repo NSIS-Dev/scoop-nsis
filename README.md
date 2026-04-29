@@ -34,6 +34,8 @@ scoop install nsis/dent
 
 ## Related
 
+The many ways of installing NSIS
+
 - [Debian](https://packages.debian.org/stable/nsis)
 - [Homebrew](https://formulae.brew.sh/formula/makensis)
 - [MacPorts](https://ports.macports.org/port/nsis/)
