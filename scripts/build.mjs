@@ -4,7 +4,6 @@ import { renderFile } from 'ejs';
 import { stable, prerelease } from './versions.mjs';
 import { writeFile } from 'fs';
 import logSymbols from 'log-symbols';
-import isCI from 'is-ci';
 import MFH from 'make-fetch-happen';
 import path from 'path';
 
@@ -40,9 +39,7 @@ let template = (version, hashes, outFile = null) => {
 const createManifest = async (version, outFile = null) => {
   const major = version[0];
   const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
-  const url = isCI
-    ? `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`
-    : `https://netcologne.dl.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
+  const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
 
   let response;
 
@@ -74,7 +71,7 @@ asyncForEach(allVersions, async (version) => {
 (async () => {
   const v2Versions = stable.v2;
   const v3Versions = stable.v3;
-  
+
   await createManifest(v2Versions[v2Versions.length - 1], 'nsis-2.json');
   await createManifest(v3Versions[v3Versions.length - 1], 'nsis.json');
 })();
