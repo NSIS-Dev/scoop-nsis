@@ -26,7 +26,7 @@ scoop install nsis/nsis
 
 ### Formatter
 
-Install dent, a CLI formatter for NSIS scripts.
+Install [Dent](https://github.com/idleberg/node-dent-cli), a CLI formatter for NSIS scripts
 
 ```powershell
 scoop install nsis/dent
