@@ -2,19 +2,34 @@
 
 > Scoop bucket for versioned NSIS releases
 
-## Setup
+## Prerequisites
 
-With Scoop installed and available in your command prompt, proceed as follows.
+With [Scoop installed](https://github.com/ScoopInstaller/Install#readme), make sure to add the Bucket.
 
 ```powershell
-# Add this bucket
 scoop bucket add nsis https://github.com/NSIS-Dev/scoop-nsis
+```
 
+## Usage
+
+### NSIS versions
+
+Install any NSIS version
+
+```powershell
 # Install specific version
-scoop install nsis/nsis-3.11
+scoop install nsis/nsis-3.12
 
 # Install latest
 scoop install nsis/nsis
+```
+
+### Formatter
+
+Install dent, a CLI formatter for NSIS scripts.
+
+```powershell
+scoop install nsis/dent
 ```
 
 ## Related
