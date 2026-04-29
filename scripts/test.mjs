@@ -12,7 +12,7 @@ const fetch = MFH.defaults({
 
 const __dirname = path.resolve(path.dirname(''));
 
-const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3];
+const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3].reverse();
 
 // TODO: test all versions
 asyncForEach(allVersions, async version => {

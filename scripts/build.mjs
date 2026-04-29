@@ -61,7 +61,7 @@ const createManifest = async (version, outFile = null) => {
   template(version, hashes, outFile);
 };
 
-const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3];
+const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3].reverse();
 
 // All versions
 asyncForEach(allVersions, async (version) => {
