@@ -2,13 +2,13 @@
     "homepage": "http://nsis.sourceforge.net/",
     "license": "Zlib",
     "version": "<%= version %>",
-    "url": "https://downloads.sourceforge.net/project/nsis/NSIS%20<%= majorVersion %>/<%= version %>/nsis-<%= version %>.zip",
+    "url": "<%= url %>",
     "bin": [
         "makensis.exe",
         "nsis.exe"
     ],
-    "hash": <%- JSON.stringify(hashes) %>,
-    "extract_dir": "nsis-<%= version %>",
+    "hash": <%~ JSON.stringify(hashes) %>,
+    "extract_dir": "<%= extractDir %>",
     "env_set": {
         "NSIS_HOME": "$dir",
         "NSISDIR": "$dir"

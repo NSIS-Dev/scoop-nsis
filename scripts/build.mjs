@@ -1,77 +1,88 @@
-// Dependencies
-import { asyncForEach, getHash } from './shared.mjs';
-import { renderFile } from 'ejs';
-import { stable, prerelease } from './versions.mjs';
-import { writeFile } from 'fs';
-import logSymbols from 'log-symbols';
-import MFH from 'make-fetch-happen';
-import path from 'path';
+import { readFile, writeFile } from 'node:fs/promises';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const fetch = MFH.defaults({
-  cacheManager: '.cache'
+import { Eta } from 'eta';
+import logSymbols from 'log-symbols';
+
+import { loadDataset } from './dataset.mjs';
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(__dirname, '..');
+const BUCKET_DIR = path.join(ROOT, 'bucket');
+
+const eta = new Eta({
+  views: __dirname,
+  useWith: true,
+  autoEscape: false,
+  cache: true,
 });
 
-const __dirname = path.resolve(path.dirname(''));
-let template = (version, hashes, outFile = null) => {
-  const data = {
-    version: version,
-    majorVersion: version[0],
-    hashes: hashes
-  };
+function hashStrings(zip) {
+  return [
+    `sha1:${zip.hashes.sha1}`,
+    `sha256:${zip.hashes.sha256}`,
+    `sha512:${zip.hashes.sha512}`,
+  ];
+}
 
-  renderFile(path.join(__dirname, 'scripts', '/manifest.ejs'), data, function(err, contents) {
-    if (err) {
-      console.error(logSymbols.error, err);
-      return;
-    }
-
-    outFile = (outFile !== null) ? outFile : `nsis-${version}.json`;
-    outFile = path.join(process.cwd(), 'bucket', outFile);
-    contents = JSON.stringify(JSON.parse(contents), null, 4);
-
-    writeFile(outFile, contents, (err) => {
-      if (err) throw err;
-      console.log(logSymbols.success, `Saved: ${outFile}`);
-    });
+function renderManifest(entry) {
+  const rendered = eta.render('manifest', {
+    version: entry.version,
+    url: entry.artifacts.zip.url,
+    extractDir: `nsis-${entry.version}`,
+    hashes: hashStrings(entry.artifacts.zip),
   });
-};
+  return JSON.stringify(JSON.parse(rendered), null, 4);
+}
 
-const createManifest = async (version, outFile = null) => {
-  const major = version[0];
-  const directory = (/\d(a|b|rc)\d*$/.test(version) === true) ? `NSIS%20${major}%20Pre-release` : `NSIS%20${major}`;
-  const url = `https://downloads.sourceforge.net/project/nsis/${directory}/${version}/nsis-${version}.zip`;
-
-  let response;
-
+async function writeIfChanged(filePath, content) {
+  let existing = null;
   try {
-    response = await fetch(url);
-  } catch (error) {
-    if (error.statusMessage) {
-      if (error.statusMessage === 'Too Many Requests') {
-        return console.warn(logSymbols.warning, `${error.statusMessage}: nsis-${version}.zip`);
-      }
-      return console.error(logSymbols.error, `${error.statusMessage}: nsis-${version}.zip`);
-    } else if (error.code === 'ENOENT') {
-      return console.log('Skipping Test: Manifest Not Found');
-    }
-    console.error(logSymbols.error, error);
+    existing = await readFile(filePath, 'utf-8');
+  } catch (err) {
+    if (err.code !== 'ENOENT') throw err;
+  }
+  if (existing === content) return 'unchanged';
+  await writeFile(filePath, content);
+  return existing === null ? 'created' : 'updated';
+}
+
+async function emit(outFile, content, stats) {
+  const result = await writeIfChanged(outFile, content);
+  stats[result] += 1;
+  if (result !== 'unchanged') {
+    console.log(logSymbols.success, `${result}: ${path.relative(ROOT, outFile)}`);
+  }
+}
+
+async function main() {
+  const dataset = await loadDataset();
+  const stats = { created: 0, updated: 0, unchanged: 0 };
+
+  for (const entry of Object.values(dataset.versions)) {
+    const out = path.join(BUCKET_DIR, `nsis-${entry.version}.json`);
+    await emit(out, renderManifest(entry), stats);
   }
 
-  const hashes = await getHash(await response.arrayBuffer());
-  template(version, hashes, outFile);
-};
+  const aliases = [
+    { name: 'nsis.json', version: dataset.latest.stable.v3 },
+    { name: 'nsis-2.json', version: dataset.latest.stable.v2 },
+  ];
+  for (const { name, version } of aliases) {
+    if (!version) continue;
+    const entry = dataset.versions[version];
+    if (!entry) continue;
+    await emit(path.join(BUCKET_DIR, name), renderManifest(entry), stats);
+  }
 
-const allVersions = [...stable.v2, ...prerelease.v3, ...stable.v3].reverse();
+  console.log(
+    logSymbols.info,
+    `${stats.created} created, ${stats.updated} updated, ${stats.unchanged} unchanged`,
+  );
+}
 
-// All versions
-asyncForEach(allVersions, async (version) => {
-  await createManifest(version);
+main().catch((err) => {
+  console.error(logSymbols.error, err);
+  process.exit(1);
 });
-
-(async () => {
-  const v2Versions = stable.v2;
-  const v3Versions = stable.v3;
-
-  await createManifest(v2Versions[v2Versions.length - 1], 'nsis-2.json');
-  await createManifest(v3Versions[v3Versions.length - 1], 'nsis.json');
-})();
