@@ -10,7 +10,7 @@
         }
     },
     "autoupdate": {
-        "url": "https://github.com/idleberg/ardent/releases/download/v$version/ardent-$version-windows-$arch.zip",
+        "url": "https://github.com/idleberg/ardent/releases/download/v$version/ardent-$version-windows-x64.zip",
         "extract_dir": "ardent-$version"
     }
 }
