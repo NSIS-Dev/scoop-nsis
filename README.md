@@ -26,10 +26,10 @@ scoop install nsis/nsis
 
 ### Formatter
 
-Install [Dent](https://github.com/idleberg/node-dent-cli), a CLI formatter for NSIS scripts
+Install [Ardent](https://github.com/idleberg/ardent), a CLI formatter for NSIS scripts
 
 ```powershell
-scoop install nsis/dent
+scoop install nsis/ardent
 ```
 
 ## Related
