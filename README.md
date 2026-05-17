@@ -32,6 +32,14 @@ Install [Ardent](https://github.com/idleberg/ardent), a CLI formatter for NSIS s
 scoop install nsis/ardent
 ```
 
+### Language Server
+
+Install [nsis-lsp](https://github.com/idleberg/nsis-nsl), a language server for NSIS.
+
+```powershell
+scoop install nsis/lsp
+```
+
 ## Related
 
 The many ways of installing NSIS
