@@ -48,4 +48,4 @@ The many ways of installing NSIS
 - [Homebrew](https://formulae.brew.sh/formula/makensis)
 - [MacPorts](https://ports.macports.org/port/nsis/)
 - [Nix](https://search.nixos.org/packages?show=nsis&size=1)
-- [Winget](https://winget.run/pkg/NSIS/NSIS)
+- [Winget](https://www.wingetly.io/apps/nsis/nsis)
