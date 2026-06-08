@@ -1,16 +1,16 @@
 {
     "homepage": "https://github.com/idleberg/ardent",
     "license": "MIT OR Apache-2.0",
-    "version": "0.9.4",
+    "version": "0.9.5",
     "bin": "ardent.exe",
     "architecture": {
         "arm64": {
-            "url": "https://github.com/idleberg/ardent/releases/download/v0.9.4/ardent-0.9.4-windows-arm64.zip",
-            "hash": "sha256:2074f5e95f8fa4f367015747675f65fc985826c016055deabe5f68d249936c82"
+            "url": "https://github.com/idleberg/ardent/releases/download/v0.9.5/ardent-0.9.5-windows-arm64.zip",
+            "hash": "sha256:5428d424cfd65c147e1cab5b58aba71fc1c643b6b7f2f278f49729b1c3fabe0f"
         },
         "64bit": {
-            "url": "https://github.com/idleberg/ardent/releases/download/v0.9.4/ardent-0.9.4-windows-x64.zip",
-            "hash": "sha256:485758ac26858abdfc6a451c32bcfb4f3b9e9f54998965ac58b9d0b3fc83be20"
+            "url": "https://github.com/idleberg/ardent/releases/download/v0.9.5/ardent-0.9.5-windows-x64.zip",
+            "hash": "sha256:e060f88b1d122811f725f0e4e2d54be619db9930936032e3f7b937e69f7cd9f5"
         }
     },
     "autoupdate": {
