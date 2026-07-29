@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-const DEFAULT_URL = 'https://nsis-dev.github.io/data/versions.json';
+const DEFAULT_URL = 'https://nsis-dev.github.io/release-data/versions.json';
 
 export async function loadDataset() {
   const file = process.env.NSIS_DATA_FILE;
