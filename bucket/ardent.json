@@ -9,7 +9,8 @@
             "hash": "sha256:703dc2e4a7c89a3783bf2ca8afec32ba122f8eafb51588f4e9663fbdb18380b6"
         },
         "64bit": {
-            "url": "sha256:e66c25e947239b5240ccf9257f4795c5931f4d266bcfab89d64c44b1a9495f24"
+            "url": "https://github.com/idleberg/ardent/releases/download/v0.12.0/ardent-0.12.0-windows-x64.zip",
+            "hash": "sha256:e66c25e947239b5240ccf9257f4795c5931f4d266bcfab89d64c44b1a9495f24"
         }
     },
     "autoupdate": {
